@@ -1,0 +1,11 @@
+CREATE DATABASE  IF NOT EXISTS `trabalho` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `trabalho`;
+
+DROP TABLE IF EXISTS `mensagens`;
+
+CREATE TABLE `mensagens` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `mensagem` varchar(250) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
