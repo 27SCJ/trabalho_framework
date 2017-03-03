@@ -1,6 +1,7 @@
 package com.fiap.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.jms.JMSException;
 import javax.servlet.RequestDispatcher;
@@ -29,10 +30,12 @@ public class MensagemController extends HttpServlet {
         if (action.equalsIgnoreCase("listMensagem")){
         	try {
 				Consumer.receber();
-			} catch (JMSException e) {
+				request.setAttribute("mensagens", dao.getAllMensagens());
+			} catch (SQLException| JMSException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-            request.setAttribute("mensagens", dao.getAllMensagens());
+            
             forward = "listMensagem.jsp";
         }
 

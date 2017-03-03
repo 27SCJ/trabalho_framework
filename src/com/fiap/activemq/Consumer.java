@@ -1,5 +1,7 @@
 package com.fiap.activemq;
 
+import java.sql.SQLException;
+
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
@@ -39,7 +41,14 @@ public class Consumer {
 
 			if (message instanceof TextMessage) {
 				TextMessage textMessage = (TextMessage) message;
-				dao.addMensagem(textMessage.getText());
+
+				try {
+					dao.addMensagem(textMessage.getText());
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				
+				
 			}
 			else
 				break;

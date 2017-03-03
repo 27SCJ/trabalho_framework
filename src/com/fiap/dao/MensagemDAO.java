@@ -9,31 +9,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fiap.model.Mensagem;
-import com.fiap.util.DbUtil;
+import com.fiap.util.ConnectionFactory;
 
 public class MensagemDAO {
 
-	private Connection connection;
-
-	public MensagemDAO() {
-		connection = DbUtil.getConnection();
-	}
-
-	public void addMensagem(String mensagem) {
+	public void addMensagem(String mensagem) throws SQLException {
+		Connection con = new ConnectionFactory().getConnection();
+		
 		try {
-			PreparedStatement preparedStatement = connection
-					.prepareStatement("insert into mensagens(mensagem) values (?)");
+			PreparedStatement preparedStatement = con.prepareStatement("insert into mensagens(mensagem) values (?)");
 			preparedStatement.setString(1, mensagem);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			con.close();
 		}
-	}	
+	}
 
-	public List<Mensagem> getAllMensagens() {
+	public List<Mensagem> getAllMensagens() throws SQLException {
+		Connection con = new ConnectionFactory().getConnection();
+
 		List<Mensagem> mensagens = new ArrayList<Mensagem>();
 		try {
-			Statement statement = connection.createStatement();
+			Statement statement = con.createStatement();
 			ResultSet rs = statement.executeQuery("select * from mensagens");
 			while (rs.next()) {
 				Mensagem mensagem = new Mensagem();
@@ -43,8 +42,9 @@ public class MensagemDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			con.close();
 		}
-		
 		return mensagens;
 	}
 
