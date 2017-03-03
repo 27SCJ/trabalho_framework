@@ -28,14 +28,11 @@ public class MensagemController extends HttpServlet {
         String action = request.getParameter("action");
 
         if (action.equalsIgnoreCase("listMensagem")){
-        	try {
-				Consumer.receber();
+			try {
 				request.setAttribute("mensagens", dao.getAllMensagens());
-			} catch (SQLException| JMSException e) {
-				// TODO Auto-generated catch block
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-            
             forward = "listMensagem.jsp";
         }else if (action.equalsIgnoreCase("lerFila")){
         	try {
