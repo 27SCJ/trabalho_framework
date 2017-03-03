@@ -6,9 +6,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="mensagem.jsp"> Enviar mensagem</a> <br/>
 
-<a href="MensagemController?action=listMensagem">Listar mensagens</a>
+<p> <a href="mensagem.jsp"> Enviar mensagem</a> </p>
+<p> <a href="MensagemController?action=lerFila"> Ler mensagens e gravar</a> </p>
+<p> <a href="MensagemController?action=listMensagem">Listar mensagens</a>  </p>
 
 </body>
 </html>

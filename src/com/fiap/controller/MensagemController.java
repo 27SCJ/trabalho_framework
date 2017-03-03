@@ -37,7 +37,18 @@ public class MensagemController extends HttpServlet {
 			}
             
             forward = "listMensagem.jsp";
+        }else if (action.equalsIgnoreCase("lerFila")){
+        	try {
+				request.setAttribute("mensagens", Consumer.lerLista());
+			} catch (SQLException| JMSException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            
+            forward = "lerFila.jsp";
         }
+        
+        
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
