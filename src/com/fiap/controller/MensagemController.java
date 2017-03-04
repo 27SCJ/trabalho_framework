@@ -37,7 +37,7 @@ public class MensagemController extends HttpServlet {
         }else if (action.equalsIgnoreCase("lerFila")){
         	try {
 				request.setAttribute("mensagens", Consumer.lerLista());
-			} catch (SQLException| JMSException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

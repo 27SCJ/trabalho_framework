@@ -21,6 +21,7 @@
                 <tr>
                     <td><c:out value="${mensagem.mensagemid}" /></td>
                     <td><c:out value="${mensagem.mensagem}" /></td>
+                    <td> <a target="_blank" href="${mensagem.urls}" >Pagina</a></td>
                 </tr>
             </c:forEach>
         </tbody>
