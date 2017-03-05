@@ -14,7 +14,8 @@
 <body>
     <script>
     </script>
-
+	<h2>Pesquisar um termo na documentacao do Lucene / Solr</h2>
+    <h2>Cadastrar mensagem</h2>
     <form method="POST" action='MensagemController' name="frmAddMensagem">
         Mensagem: <input  type="text" name="txt_mensagem"  value="" /> <br /> 
 			 <br /> 

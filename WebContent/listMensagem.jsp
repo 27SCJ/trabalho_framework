@@ -9,11 +9,15 @@
 <title>Mostrando mensagens</title>
 </head>
 <body>
+	<h2>Listar mensagens</h2>
+
     <table border=1>
         <thead>
             <tr>
-                <th>Codigo</th>
-                <th>Mensagem</th>
+                <th width=100>Codigo</th>
+                <th width=100>Mensagem</th>
+                <th width=300>Links</th>
+                <th width=300>URLs</th>
             </tr>
         </thead>
         <tbody>
@@ -21,7 +25,8 @@
                 <tr>
                     <td><c:out value="${mensagem.mensagemid}" /></td>
                     <td><c:out value="${mensagem.mensagem}" /></td>
-                    <td> <a target="_blank" href="${mensagem.urls}" >Pagina</a></td>
+                    <td> <a target="_blank" href="${mensagem.urls}" ></a>Paginas encontradas</td>
+                    <td><c:out value="${mensagem.urls}" escapeXml="false" /></td>
                 </tr>
             </c:forEach>
         </tbody>
