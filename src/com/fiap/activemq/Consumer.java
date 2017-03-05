@@ -50,7 +50,6 @@ public class Consumer {
 		
 		Message message;
 		List<Mensagem> mensagens = new ArrayList<Mensagem>();
-
 		
 		while(true) {
 			message = consumer.receive(500);
@@ -61,18 +60,34 @@ public class Consumer {
 				//ENVIAR MENSAGEM PELO JSON
 				
 				String jsonMessage = sendGet(textMessage.getText());
+				
+				//System.out.println(jsonMessage);
 				JSONObject jObject  = new JSONObject(jsonMessage);
 				JSONObject data = jObject.getJSONObject("response");
 				JSONArray docs = data.getJSONArray("docs");
-				String resourcename = docs.getJSONObject(0).getString("resourcename");
+				
+				int tam = docs.length();
+				
+				String links = "";
+				String resourcename = "";
+				if (tam > 0) {
+				for (int i=0; i< tam; i++) {
+					String res = docs.getJSONObject(i).getString("resourcename");
+					res = urlBook+res.replace("[", "").replace("]", "").replace("\"","").split("docs")[1];					
+					links = links + "<a href=" + res + " target=_blank >" + res + "</a><br/>";
+				}
+				resourcename = docs.getJSONObject(0).getString("resourcename");				
+				resourcename = urlBook+resourcename.replace("[", "").replace("]", "").replace("\"","").split("docs")[1];
+				} else {
+					links = "Nenhum registro encontrado.";
+				}				
 				
 				try {
-					resourcename = urlBook+resourcename.replace("[", "").replace("]", "").replace("\"","").split("docs")[1];
-					dao.addMensagem(textMessage.getText(),resourcename);
+					dao.addMensagem(textMessage.getText(),links);
 					
 					Mensagem mensagem = new Mensagem();
 					mensagem.setMensagemid(id++);
-					mensagem.setMensagem(textMessage.getText());
+					mensagem.setMensagem(textMessage.getText() + ":" + tam + " arquivo(s) encontrado(s)");
 					mensagem.setUrls(url);
 					mensagens.add(mensagem);
 					
